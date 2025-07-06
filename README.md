@@ -1,18 +1,28 @@
 [![Executar no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/peder1981/futurista/blob/main/futurista_interativo.ipynb)
 
-# 📊 Futurista
+# 🌐 Futurista — Análise Econômica Interativa
 
-Ferramenta para análise interativa de juros reais e inflação a partir de dados do Banco Mundial.
+O **Futurista** é uma aplicação Python para análise, visualização e comparação interativa entre **juros reais** e **inflação anual** com dados do Banco Mundial.
 
-## Funcionalidades
+---
 
-- Gera mapa interativo com Plotly
-- Exporta CSV e relatórios em Markdown
-- Suporte a análise por ano e países
-- Compatível com Jupyter Notebook
+## 🚀 Funcionalidades
 
-## Instalação
+- 📊 Tabela ordenada com todos os países disponíveis
+- 🗺️ Mapa interativo com escala de razão juros/inflação
+- 📉 Gráfico de dispersão com gap e escalas ajustáveis
+- 📥 Exportação de CSV e Markdown
+- 📓 Interface em Jupyter Notebook e Streamlit (painel web)
+
+---
+
+## ⚙️ Instalação
 
 ```bash
-pip install futurista
+git clone https://github.com/seuusuario/futurista.git
+cd futurista
+python -m venv venv
+source venv/bin/activate  # Linux/macOS
+.\venv\Scripts\activate   # Windows
+pip install -r requirements.txt
 
