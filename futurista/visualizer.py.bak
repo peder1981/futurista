@@ -1,0 +1,117 @@
+"""
+Módulo responsável pelas visualizações de dados econômicos.
+"""
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+from IPython.display import display, Markdown
+import numpy as np
+from scipy import stats
+
+class EconomicVisualizer:
+    """
+    Classe para criação de visualizações de dados econômicos.
+    """
+    
+    @staticmethod
+    def create_markdown_table(df, year, max_rows=50):
+        """
+        Cria uma tabela markdown formatada com os dados.
+        
+        Args:
+            df (pd.DataFrame): DataFrame com os dados
+            year (int): Ano dos dados
+            max_rows (int): Número máximo de linhas na tabela
+            
+        Returns:
+            str: Tabela markdown formatada
+        """
+        md = f"## 🌍 Juros Reais vs Inflação — {year}\n\n"
+        md += "| País | ISO3 | Juros (%) | Inflação (%) | Diferença (pp) | Razão |\n"
+        md += "|------|------|------------|----------------|----------------|--------|\n"
+        
+        for _, row in df.head(max_rows).iterrows():
+            md += f"| {row['country']} | {row['iso3']} | {row['interest']:.2f} | "
+            md += f"{row['inflation']:.2f} | {row['gap']:.2f} | {row['ratio']:.2f} |\n"
+            
+        return md
+    
+    @staticmethod
+    def display_markdown_table(df, year, max_rows=50):
+        """
+        Exibe uma tabela markdown formatada.
+        
+        Args:
+            df (pd.DataFrame): DataFrame com os dados
+            year (int): Ano dos dados
+            max_rows (int): Número máximo de linhas na tabela
+        """
+        md = EconomicVisualizer.create_markdown_table(df, year, max_rows)
+        display(Markdown(md))
+    
+    @staticmethod
+    def create_choropleth_map(df, year):
+        """
+        Cria um mapa coroplético com os dados.
+        
+        Args:
+            df (pd.DataFrame): DataFrame com os dados
+            year (int): Ano dos dados
+            
+        Returns:
+            plotly.graph_objects.Figure: Figura do mapa
+        """
+        fig = px.choropleth(
+            df,
+            locations="iso3",
+            color="ratio",
+            hover_name="country",
+            color_continuous_scale="Plasma",
+            title=f"🌐 Juros / Inflação — {year}",
+            labels={"ratio": "Juros / Inflação"}
+        )
+        fig.update_geos(showframe=False, showcoastlines=False)
+        fig.update_layout(margin={"r":0,"t":50,"l":0,"b":0})
+        
+        return fig
+    
+    @staticmethod
+    def create_scatter_plot(df, year):
+        """
+        Cria um gráfico de dispersão com os dados.
+        
+        Args:
+            df (pd.DataFrame): DataFrame com os dados
+            year (int): Ano dos dados
+            
+        Returns:
+            plotly.graph_objects.Figure: Figura do gráfico de dispersão
+        """
+        fig = px.scatter(
+            df,
+            x="inflation",
+            y="interest",
+            color="ratio",
+            hover_name="country",
+            title=f"📉 Dispersão: Inflação × Juros — {year}",
+            labels={"interest": "Juros (%)", "inflation": "Inflação (%)"}
+        )
+        fig.update_traces(marker=dict(opacity=0.7, line=dict(width=1.0, color='DarkSlateGrey')))
+        
+        # Adiciona linha de referência onde juros = inflação
+        max_val = max(df["interest"].max(), df["inflation"].max()) * 1.1
+        fig.add_shape(
+            type="line", 
+            x0=0, y0=0, 
+            x1=max_val, y1=max_val,
+            line=dict(color="grey", width=1, dash="dash")
+        )
+        fig.add_annotation(
+            x=max_val*0.7, 
+            y=max_val*0.7, 
+            text="Juros = Inflação", 
+            showarrow=False,
+            font=dict(color="grey")
+        )
+        
+        return fig

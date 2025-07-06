@@ -1,27 +1,42 @@
 #!/bin/bash
 
-echo "🚀 Iniciando execução do projeto futurista..."
+echo "🧠 Projeto Futurista - Menu Interativo"
 
-# Verifica se o ambiente virtual já existe
-if [ ! -d "venv" ]; then
-    echo "🛠️ Criando ambiente virtual 'venv'..."
-    python3 -m venv venv
-fi
+while true; do
+  echo ""
+  echo "1. Criar ambiente virtual e instalar dependências"
+  echo "2. Executar futurista_app.py (versão modularizada)"
+  echo "3. Executar futurista.py (versão original)"
+  echo "4. Iniciar painel web (Streamlit)"
+  echo "5. Sair"
+  read -p "Escolha uma opção: " opcao
 
-# Ativa o ambiente virtual
-source venv/bin/activate
-
-# Atualiza pip
-pip install --upgrade pip
-
-# Instala dependências necessárias
-echo "📦 Instalando dependências..."
-pip install pandas world_bank_data pycountry plotly
-
-# Executa o script principal
-echo "▶️ Executando futurista.py..."
-python futurista.py
-
-# Desativa o ambiente virtual
-deactivate
+  case $opcao in
+    1)
+      [ ! -d "venv" ] && python3 -m venv venv
+      source venv/bin/activate
+      pip install --upgrade pip
+      pip install -r requirements.txt
+      ;;
+    2)
+      source venv/bin/activate
+      python futurista_app.py
+      ;;
+    3)
+      source venv/bin/activate
+      python futurista.py
+      ;;
+    4)
+      source venv/bin/activate
+      streamlit run futurista_streamlit.py
+      ;;
+    5)
+      echo "👋 Encerrando..."
+      break
+      ;;
+    *)
+      echo "❌ Opção inválida."
+      ;;
+  esac
+done
 

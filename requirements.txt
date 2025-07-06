@@ -2,4 +2,7 @@ pandas
 world_bank_data
 pycountry
 plotly
-
+streamlit
+ipywidgets
+scipy
+numpy<1.27.0
