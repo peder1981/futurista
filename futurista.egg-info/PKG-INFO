@@ -1,16 +1,11 @@
 Metadata-Version: 2.4
 Name: futurista
 Version: 0.1.0
-Summary: Análise de dados de inflação e juros usando o Banco Mundial com visualização interativa
-Home-page: https://github.com/seuusuario/futurista
+Summary: Análise interativa de juros reais e inflação com dados do Banco Mundial
+Home-page: https://github.com/peder1981/futurista
 Author: Peder
-Author-email: seuemail@exemplo.com
+Author-email: Peder <seuemail@exemplo.com>
 License: MIT
-Classifier: Development Status :: 3 - Alpha
-Classifier: Intended Audience :: Developers
-Classifier: License :: OSI Approved :: MIT License
-Classifier: Programming Language :: Python :: 3
-Classifier: Topic :: Scientific/Engineering :: Visualization
 Requires-Python: >=3.7
 Description-Content-Type: text/markdown
 License-File: LICENSE.md
@@ -20,16 +15,11 @@ Requires-Dist: pycountry
 Requires-Dist: plotly
 Requires-Dist: ipywidgets
 Dynamic: author
-Dynamic: author-email
-Dynamic: classifier
-Dynamic: description
-Dynamic: description-content-type
 Dynamic: home-page
-Dynamic: license
 Dynamic: license-file
-Dynamic: requires-dist
 Dynamic: requires-python
-Dynamic: summary
+
+[![Executar no Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/peder1981/futurista/blob/main/futurista_interativo.ipynb)
 
 # 📊 Futurista
 

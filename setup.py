@@ -18,7 +18,7 @@ setup(
     long_description=open("README.md", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
     license="MIT",
-    url="https://github.com/seuusuario/futurista",  # Atualize com seu repositório real
+    url="https://github.com/peder1981/futurista",  # Atualize com seu repositório real
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
