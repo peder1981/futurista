@@ -1,0 +1,49 @@
+Metadata-Version: 2.4
+Name: futurista
+Version: 0.1.0
+Summary: Análise de dados de inflação e juros usando o Banco Mundial com visualização interativa
+Home-page: https://github.com/seuusuario/futurista
+Author: Peder
+Author-email: seuemail@exemplo.com
+License: MIT
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Scientific/Engineering :: Visualization
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE.md
+Requires-Dist: pandas
+Requires-Dist: world_bank_data
+Requires-Dist: pycountry
+Requires-Dist: plotly
+Requires-Dist: ipywidgets
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# 📊 Futurista
+
+Ferramenta para análise interativa de juros reais e inflação a partir de dados do Banco Mundial.
+
+## Funcionalidades
+
+- Gera mapa interativo com Plotly
+- Exporta CSV e relatórios em Markdown
+- Suporte a análise por ano e países
+- Compatível com Jupyter Notebook
+
+## Instalação
+
+```bash
+pip install futurista
+

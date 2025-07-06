@@ -1,0 +1,8 @@
+LICENSE.md
+README.md
+setup.py
+futurista.egg-info/PKG-INFO
+futurista.egg-info/SOURCES.txt
+futurista.egg-info/dependency_links.txt
+futurista.egg-info/requires.txt
+futurista.egg-info/top_level.txt

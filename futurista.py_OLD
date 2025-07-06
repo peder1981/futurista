@@ -1,0 +1,52 @@
+import pandas as pd
+import world_bank_data as wb
+import pycountry
+
+print("Processando dados...")
+
+# Baixar dados
+inflation = wb.get_series("FP.CPI.TOTL.ZG", date="1990:2023", id_or_value="id")
+interest = wb.get_series("FR.INR.RINR", date="1990:2023", id_or_value="id")
+
+# Resetar índices
+df_inflation = inflation.reset_index()
+df_interest = interest.reset_index()
+
+# Mesclar
+merged = pd.merge(df_inflation, df_interest, on=["Country", "Year"], how="inner")
+
+# Verificar estrutura
+print("\n🔍 Primeiras linhas do DataFrame mesclado:")
+print(merged.head())
+print("\n📋 Colunas disponíveis:")
+print(merged.columns.tolist())
+
+# Renomear colunas principais
+merged.rename(columns={
+    "Country": "country",
+    "Year": "year",
+    "FP.CPI.TOTL.ZG": "inflation",
+    "FR.INR.RINR": "interest"
+}, inplace=True)
+
+# Adicionar código ISO3 usando pycountry
+def get_iso3(country_name):
+    try:
+        return pycountry.countries.lookup(country_name).alpha_3
+    except LookupError:
+        return None
+
+merged["iso3"] = merged["country"].apply(get_iso3)
+
+# Calcular razão
+merged["ratio"] = merged["interest"] / merged["inflation"]
+
+# Filtrar
+filtered = merged[(merged["ratio"] > 1) & (merged["inflation"] > 0)]
+
+# Top 10
+top_countries = filtered.sort_values("ratio", ascending=False).head(10)
+
+print("\n🌍 Top 10 países com maior relação juros/inflação:")
+print(top_countries[["iso3", "country", "year", "interest", "inflation", "ratio"]])
+

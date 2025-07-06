@@ -1,0 +1,5 @@
+pandas
+world_bank_data
+pycountry
+plotly
+
