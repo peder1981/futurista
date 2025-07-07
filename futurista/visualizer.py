@@ -193,12 +193,16 @@ class EconomicVisualizer:
             "gap": "Diferença (pp)"
         }
         
+        # Garantir que a coluna 'year' seja inteira para evitar erros de tipo
+        df_copy = df.copy()
+        df_copy["year"] = df_copy["year"].astype(int)
+        
         # Filtrar dados para os países selecionados
-        filtered_df = df[df["country"].isin(countries)]
+        filtered_df = df_copy[df_copy["country"].isin(countries)]
         
         # Anos disponíveis e último ano
         years = filtered_df["year"].unique()
-        max_year = filtered_df["year"].max()
+        max_year = filtered_df["year"].max()  # Já é inteiro
         min_year = max(filtered_df["year"].min(), max_year - 10)  # Últimos 10 anos para projeção
         
         # DataFrame para armazenar projeções
